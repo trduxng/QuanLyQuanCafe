@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QlCafe" Class="QLCaFeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-RJQQ6DG\SQLEXPRESS;Initial Catalog=QlCafe;Integrated Security=True" SettingsObjectName="QuanLyQuanCafe.Properties.Settings" SettingsPropertyName="QlCafeConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BanAn" Member="BanAns">
+    <Type Name="BanAn">
+      <Column Name="MaBan" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenBan" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="TrangThai" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="BanAn_HoaDon" Member="HoaDons" ThisKey="MaBan" OtherKey="MaBan" Type="HoaDon" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TaiKhoan" Member="TaiKhoans">
+    <Type Name="TaiKhoan">
+      <Column Name="MaTK" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenDangNhap" Type="System.String" DbType="Char(25) NOT NULL" CanBeNull="false" />
+      <Column Name="MK" Type="System.String" DbType="Char(25) NOT NULL" CanBeNull="false" />
+      <Column Name="LoaiTk" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="MaNV" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Association Name="NhanVien_TaiKhoan" Member="NhanVien" ThisKey="MaNV" OtherKey="MaNV" Type="NhanVien" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ChamCong" Member="ChamCongs">
+    <Type Name="ChamCong">
+      <Column Name="MaChamCong" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaNV" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayLam" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="SoCaLam" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="NhanVien_ChamCong" Member="NhanVien" ThisKey="MaNV" OtherKey="MaNV" Type="NhanVien" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ChiTietHD" Member="ChiTietHDs">
+    <Type Name="ChiTietHD">
+      <Column Name="MaCTHD" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaMonAn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuong" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Association Name="HoaDon_ChiTietHD" Member="HoaDon" ThisKey="MaHD" OtherKey="MaHD" Type="HoaDon" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="MonAn_ChiTietHD" Member="MonAn" ThisKey="MaMonAn" OtherKey="MaMonAn" Type="MonAn" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ChiTietPhieuNhap" Member="ChiTietPhieuNhaps">
+    <Type Name="ChiTietPhieuNhap">
+      <Column Name="MaCTPN" Type="System.String" DbType="Char(7) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaPhieuNhap" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="MaMH" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuongNhap" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="DonGia" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="MatHang_ChiTietPhieuNhap" Member="MatHang" ThisKey="MaMH" OtherKey="MaMH" Type="MatHang" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="PhieuNhap_ChiTietPhieuNhap" Member="PhieuNhap" ThisKey="MaPhieuNhap" OtherKey="MaPhieNhap" Type="PhieuNhap" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ChiTietPhieuXuat" Member="ChiTietPhieuXuats">
+    <Type Name="ChiTietPhieuXuat">
+      <Column Name="MaCTPX" Type="System.String" DbType="Char(7) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaPhieuXuat" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="MaMH" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuongXuat" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="MatHang_ChiTietPhieuXuat" Member="MatHang" ThisKey="MaMH" OtherKey="MaMH" Type="MatHang" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="PhieuXuat_ChiTietPhieuXuat" Member="PhieuXuat" ThisKey="MaPhieuXuat" OtherKey="MaPhieuXuat" Type="PhieuXuat" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HoaDon" Member="HoaDons">
+    <Type Name="HoaDon">
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MaBan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TinhTrang" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GiamGia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="HoaDon_ChiTietHD" Member="ChiTietHDs" ThisKey="MaHD" OtherKey="MaHD" Type="ChiTietHD" />
+      <Association Name="BanAn_HoaDon" Member="BanAn" ThisKey="MaBan" OtherKey="MaBan" Type="BanAn" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KhachHang" Member="KhachHangs">
+    <Type Name="KhachHang">
+      <Column Name="MaKH" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKH" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="SDT" Type="System.String" DbType="Char(11) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoaiHang" Member="LoaiHangs">
+    <Type Name="LoaiHang">
+      <Column Name="MaLoaiHang" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLoaiHang" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Association Name="LoaiHang_MatHang" Member="MatHangs" ThisKey="MaLoaiHang" OtherKey="MaLoaiHang" Type="MatHang" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoaiMon" Member="LoaiMons">
+    <Type Name="LoaiMon">
+      <Column Name="MaLoaiMon" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenLoaiMon" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="HinhAnh" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="LoaiMon_MonAn" Member="MonAns" ThisKey="MaLoaiMon" OtherKey="MaLoaiMon" Type="MonAn" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MatHang" Member="MatHangs">
+    <Type Name="MatHang">
+      <Column Name="MaMH" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenMH" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="MaLoaiHang" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuong" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="MatHang_ChiTietPhieuNhap" Member="ChiTietPhieuNhaps" ThisKey="MaMH" OtherKey="MaMH" Type="ChiTietPhieuNhap" />
+      <Association Name="MatHang_ChiTietPhieuXuat" Member="ChiTietPhieuXuats" ThisKey="MaMH" OtherKey="MaMH" Type="ChiTietPhieuXuat" />
+      <Association Name="LoaiHang_MatHang" Member="LoaiHang" ThisKey="MaLoaiHang" OtherKey="MaLoaiHang" Type="LoaiHang" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MonAn" Member="MonAns">
+    <Type Name="MonAn">
+      <Column Name="MaMonAn" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenMonAn" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="MaLoaiMon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Gia" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="HinhAnh" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="MonAn_ChiTietHD" Member="ChiTietHDs" ThisKey="MaMonAn" OtherKey="MaMonAn" Type="ChiTietHD" />
+      <Association Name="LoaiMon_MonAn" Member="LoaiMon" ThisKey="MaLoaiMon" OtherKey="MaLoaiMon" Type="LoaiMon" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NhaCungCap" Member="NhaCungCaps">
+    <Type Name="NhaCungCap">
+      <Column Name="MaNhaCC" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNhaCC" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SDT" Type="System.String" DbType="Char(11) NOT NULL" CanBeNull="false" />
+      <Association Name="NhaCungCap_PhieuNhap" Member="PhieuNhaps" ThisKey="MaNhaCC" OtherKey="MaNhaCC" Type="PhieuNhap" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NhanVien" Member="NhanViens">
+    <Type Name="NhanVien">
+      <Column Name="MaNV" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNV" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="CMND" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
+      <Column Name="SDT" Type="System.String" DbType="Char(11) NOT NULL" CanBeNull="false" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayVaoLam" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ChucVu" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="GioiTinh" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="HinhAnh" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="NhanVien_TaiKhoan" Member="TaiKhoans" ThisKey="MaNV" OtherKey="MaNV" Type="TaiKhoan" />
+      <Association Name="NhanVien_ChamCong" Member="ChamCongs" ThisKey="MaNV" OtherKey="MaNV" Type="ChamCong" />
+      <Association Name="NhanVien_PhieuNhap" Member="PhieuNhaps" ThisKey="MaNV" OtherKey="MaNV" Type="PhieuNhap" />
+      <Association Name="NhanVien_PhieuXuat" Member="PhieuXuats" ThisKey="MaNV" OtherKey="MaNV" Type="PhieuXuat" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PhieuNhap" Member="PhieuNhaps">
+    <Type Name="PhieuNhap">
+      <Column Name="MaPhieNhap" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NgayNhap" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MaNV" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="MaNhaCC" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="LyDoNhap" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TongTien" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Association Name="PhieuNhap_ChiTietPhieuNhap" Member="ChiTietPhieuNhaps" ThisKey="MaPhieNhap" OtherKey="MaPhieuNhap" Type="ChiTietPhieuNhap" />
+      <Association Name="NhaCungCap_PhieuNhap" Member="NhaCungCap" ThisKey="MaNhaCC" OtherKey="MaNhaCC" Type="NhaCungCap" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="NhanVien_PhieuNhap" Member="NhanVien" ThisKey="MaNV" OtherKey="MaNV" Type="NhanVien" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PhieuXuat" Member="PhieuXuats">
+    <Type Name="PhieuXuat">
+      <Column Name="MaPhieuXuat" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NgayXuat" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MaNV" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="LyDoXuat" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="PhieuXuat_ChiTietPhieuXuat" Member="ChiTietPhieuXuats" ThisKey="MaPhieuXuat" OtherKey="MaPhieuXuat" Type="ChiTietPhieuXuat" />
+      <Association Name="NhanVien_PhieuXuat" Member="NhanVien" ThisKey="MaNV" OtherKey="MaNV" Type="NhanVien" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoadLoaiMon" Member="LoadLoaiMons">
+    <Type Name="LoadLoaiMon">
+      <Column Name="MaLoaiMon" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenLoaiMon" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TKPhieuXuat" Member="TKPhieuXuats">
+    <Type Name="TKPhieuXuat">
+      <Column Name="MaPhieuXuat" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayXuat" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MaNV" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="MaMH" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuongXuat" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoadTK" Member="LoadTKs">
+    <Type Name="LoadTK">
+      <Column Name="MaTK" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="TenDangNhap" Type="System.String" DbType="Char(25) NOT NULL" CanBeNull="false" />
+      <Column Name="ChucVu" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MK" Type="System.String" DbType="Char(25) NOT NULL" CanBeNull="false" />
+      <Column Name="MaNV" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportHoaDon" Member="ReportHoaDons">
+    <Type Name="ReportHoaDon">
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TenBan" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="TinhTrang" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GiamGia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TenMonAn" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuong" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Gia" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportHoaDon1" Member="ReportHoaDon1s">
+    <Type Name="ReportHoaDon1">
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TenBan" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="TinhTrang" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GiamGia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TenMonAn" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuong" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Gia" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ThucDon" Member="ThucDons">
+    <Type Name="ThucDon">
+      <Column Name="MaMonAn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenMonAn" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="TenLoaiMon" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="Gia" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="HinhAnh" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TKDoanhThu" Member="TKDoanhThus">
+    <Type Name="TKDoanhThu">
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MaMonAn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuong" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Gia" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TKPhieuNhap" Member="TKPhieuNhaps">
+    <Type Name="TKPhieuNhap">
+      <Column Name="MaPhieuNhap" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayNhap" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MaNV" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="MaNhaCC" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="MaMH" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuongNhap" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="DonGia" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.PR_ChuyenBan" Method="PR_ChuyenBan">
+    <Parameter Name="MaBan1" Parameter="maBan1" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MaBan2" Parameter="maBan2" Type="System.Int32" DbType="Int" />
+  </Function>
+  <Function Name="dbo.PR_InsertHD" Method="PR_InsertHD">
+    <Parameter Name="MaBan" Parameter="maBan" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.PR_GETDanhSachBan" Method="PR_GETDanhSachBan">
+    <ElementType Name="PR_GETDanhSachBanResult">
+      <Column Name="MaBan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenBan" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="TrangThai" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.PR_GETMaChamCong" Method="PR_GETMaChamCong">
+    <Parameter Name="MaCC" Parameter="maCC" Type="System.String" DbType="Char(5)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.PR_GETMaKhachHang" Method="PR_GETMaKhachHang">
+    <Parameter Name="MaKH" Parameter="maKH" Type="System.String" DbType="Char(5)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.PR_GETMaLoaiMon" Method="PR_GETMaLoaiMon">
+    <Parameter Name="MaLM" Parameter="maLM" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.PR_GETMaMonAn" Method="PR_GETMaMonAn">
+    <Parameter Name="MaMA" Parameter="maMA" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.PR_GETMaNCC" Method="PR_GETMaNCC">
+    <Parameter Name="MaNCC" Parameter="maNCC" Type="System.String" DbType="Char(5)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.PR_GETMaNhanVien" Method="PR_GETMaNhanVien">
+    <Parameter Name="MaNV" Parameter="maNV" Type="System.String" DbType="Char(5)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.PR_GETMaTaiKhoan" Method="PR_GETMaTaiKhoan">
+    <Parameter Name="MaTK" Parameter="maTK" Type="System.String" DbType="Char(5)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.PR_InsertCTHD" Method="PR_InsertCTHD">
+    <Parameter Name="MaHD" Parameter="maHD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MaMonAn" Parameter="maMonAn" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SoLuong" Parameter="soLuong" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ThanhTien" Parameter="thanhTien" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
