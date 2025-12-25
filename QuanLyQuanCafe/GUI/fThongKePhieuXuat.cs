@@ -22,47 +22,53 @@ namespace QuanLyQuanCafe
         {
             try
             {
+                DateTime tuNgay = dtptungay.DateTime.Date;
+                // Lấy đến hết ngày cuối cùng (23:59:59)
+                DateTime denNgay = dtptoingay.DateTime.Date.AddDays(1).AddSeconds(-1);
 
-                var CTPX = (from ctpx in db.TKPhieuXuats
-                            where ctpx.NgayXuat >= DateTime.Parse(dtptungay.Text) && ctpx.NgayXuat <= DateTime.Parse(dtptoingay.Text)
-                            select ctpx).ToList();
-                var count = CTPX.Count();
-                if (count == 0)
+                DataTable data = DAO.PhieuXuatDAO.Instance.GetThongKePhieuXuat(tuNgay, denNgay);
+                
+                if (data.Rows.Count == 0)
                 {
-                    XtraMessageBox.Show("Không có dữ liệu trong khoảng thời gian vừa chọn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    gridControl1.DataSource = null;
+                    XtraMessageBox.Show("Không có dữ liệu trong khoảng thời gian vừa chọn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    gridControl1.DataSource = CTPX;
+                    gridControl1.DataSource = data;
+                    // Tự động tạo lại cột theo tên cột trong Procedure (Tiếng Việt)
+                    gridView1.PopulateColumns();
                 }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-
+                XtraMessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
         private void fThongKePhieuXuat_Load(object sender, EventArgs e)
         {
-
+            // Set giá trị mặc định cho DateEdit nếu cần
+            dtptungay.DateTime = DateTime.Now.Date;
+            dtptoingay.DateTime = DateTime.Now.Date;
         }
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            if(dtptungay.Text!="")
+            if(dtptungay.EditValue != null)
             {
-                if(dtptoingay.Text!="")
+                if(dtptoingay.EditValue != null)
                 {
                     loaddulieu();
                 }
                 else
                 {
-                    XtraMessageBox.Show("Bạn chưa nhập đến ngày", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    XtraMessageBox.Show("Bạn chưa nhập đến ngày", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                XtraMessageBox.Show("Bạn chưa nhập từ ngày", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Bạn chưa nhập từ ngày", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             
         }

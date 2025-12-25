@@ -392,36 +392,12 @@ namespace QuanLyQuanCafe
 
         private void barButtonItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            picTheme.Hide();
-            lblTieuDe.Hide();
-            Form frm = kiemtraform(typeof(fGioiThieu));
-            if (frm == null)
-            {
-                fGioiThieu forms = new fGioiThieu();
-                forms.MdiParent = this;
-                forms.Show();
-            }
-            else
-            {
-                frm.Activate();
-            }
+            
         }
 
         private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            picTheme.Hide();
-            lblTieuDe.Hide();
-            Form frm = kiemtraform(typeof(fHoTro));
-            if (frm == null)
-            {
-                fHoTro forms = new fHoTro();
-                forms.MdiParent = this;
-                forms.Show();
-            }
-            else
-            {
-                frm.Activate();
-            }
+            
         }
 
         private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

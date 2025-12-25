@@ -1,0 +1,37 @@
+USE [QlCafe]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:      Gemini Agent
+-- Create date: 23/12/2025
+-- Description: Thống kê danh sách phiếu xuất và chi tiết hàng hóa theo khoảng thời gian
+-- Input:       @TuNgay (Ngày bắt đầu), @DenNgay (Ngày kết thúc)
+-- =============================================
+CREATE OR ALTER PROCEDURE [dbo].[PR_ThongKePhieuXuat]
+    @TuNgay SMALLDATETIME,
+    @DenNgay SMALLDATETIME
+AS
+BEGIN
+    SELECT 
+        px.MaPhieuXuat AS [Mã Phiếu],
+        px.NgayXuat AS [Ngày Xuất],
+        nv.TenNV AS [Nhân Viên],
+        mh.TenMH AS [Tên Mặt Hàng],
+        ctpx.SoLuongXuat AS [Số Lượng],
+        px.LyDoXuat AS [Lý Do]
+    FROM 
+        dbo.PhieuXuat px
+        INNER JOIN dbo.ChiTietPhieuXuat ctpx ON px.MaPhieuXuat = ctpx.MaPhieuXuat
+        INNER JOIN dbo.MatHang mh ON ctpx.MaMH = mh.MaMH
+        INNER JOIN dbo.NhanVien nv ON px.MaNV = nv.MaNV
+    WHERE 
+        px.NgayXuat BETWEEN @TuNgay AND @DenNgay
+    ORDER BY 
+        px.NgayXuat DESC
+END
+GO

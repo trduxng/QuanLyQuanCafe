@@ -47,7 +47,7 @@
       <Column Name="DonGia" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
       <Column Name="GhiChu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="MatHang_ChiTietPhieuNhap" Member="MatHang" ThisKey="MaMH" OtherKey="MaMH" Type="MatHang" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="PhieuNhap_ChiTietPhieuNhap" Member="PhieuNhap" ThisKey="MaPhieuNhap" OtherKey="MaPhieNhap" Type="PhieuNhap" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="PhieuNhap_ChiTietPhieuNhap" Member="PhieuNhap" ThisKey="MaPhieuNhap" OtherKey="MaPhieuNhap" Type="PhieuNhap" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ChiTietPhieuXuat" Member="ChiTietPhieuXuats">
@@ -146,13 +146,13 @@
   </Table>
   <Table Name="dbo.PhieuNhap" Member="PhieuNhaps">
     <Type Name="PhieuNhap">
-      <Column Name="MaPhieNhap" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaPhieuNhap" Type="System.String" DbType="Char(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="NgayNhap" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
       <Column Name="MaNV" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
       <Column Name="MaNhaCC" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
       <Column Name="LyDoNhap" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="TongTien" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
-      <Association Name="PhieuNhap_ChiTietPhieuNhap" Member="ChiTietPhieuNhaps" ThisKey="MaPhieNhap" OtherKey="MaPhieuNhap" Type="ChiTietPhieuNhap" />
+      <Association Name="PhieuNhap_ChiTietPhieuNhap" Member="ChiTietPhieuNhaps" ThisKey="MaPhieuNhap" OtherKey="MaPhieuNhap" Type="ChiTietPhieuNhap" />
       <Association Name="NhaCungCap_PhieuNhap" Member="NhaCungCap" ThisKey="MaNhaCC" OtherKey="MaNhaCC" Type="NhaCungCap" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="NhanVien_PhieuNhap" Member="NhanVien" ThisKey="MaNV" OtherKey="MaNV" Type="NhanVien" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>

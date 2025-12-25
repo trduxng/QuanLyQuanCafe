@@ -1347,7 +1347,7 @@ namespace QuanLyQuanCafe
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuNhap_ChiTietPhieuNhap", Storage="_PhieuNhap", ThisKey="MaPhieuNhap", OtherKey="MaPhieNhap", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuNhap_ChiTietPhieuNhap", Storage="_PhieuNhap", ThisKey="MaPhieuNhap", OtherKey="MaPhieuNhap", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public PhieuNhap PhieuNhap
 		{
 			get
@@ -1370,7 +1370,7 @@ namespace QuanLyQuanCafe
 					if ((value != null))
 					{
 						value.ChiTietPhieuNhaps.Add(this);
-						this._MaPhieuNhap = value.MaPhieNhap;
+						this._MaPhieuNhap = value.MaPhieuNhap;
 					}
 					else
 					{
@@ -3271,7 +3271,7 @@ namespace QuanLyQuanCafe
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _MaPhieNhap;
+		private string _MaPhieuNhap;
 		
 		private System.DateTime _NgayNhap;
 		
@@ -3293,8 +3293,8 @@ namespace QuanLyQuanCafe
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaPhieNhapChanging(string value);
-    partial void OnMaPhieNhapChanged();
+    partial void OnMaPhieuNhapChanging(string value);
+    partial void OnMaPhieuNhapChanged();
     partial void OnNgayNhapChanging(System.DateTime value);
     partial void OnNgayNhapChanged();
     partial void OnMaNVChanging(string value);
@@ -3315,22 +3315,22 @@ namespace QuanLyQuanCafe
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPhieNhap", DbType="Char(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MaPhieNhap
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPhieuNhap", DbType="Char(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaPhieuNhap
 		{
 			get
 			{
-				return this._MaPhieNhap;
+				return this._MaPhieuNhap;
 			}
 			set
 			{
-				if ((this._MaPhieNhap != value))
+				if ((this._MaPhieuNhap != value))
 				{
-					this.OnMaPhieNhapChanging(value);
+					this.OnMaPhieuNhapChanging(value);
 					this.SendPropertyChanging();
-					this._MaPhieNhap = value;
-					this.SendPropertyChanged("MaPhieNhap");
-					this.OnMaPhieNhapChanged();
+					this._MaPhieuNhap = value;
+					this.SendPropertyChanged("MaPhieuNhap");
+					this.OnMaPhieuNhapChanged();
 				}
 			}
 		}
@@ -3443,7 +3443,7 @@ namespace QuanLyQuanCafe
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuNhap_ChiTietPhieuNhap", Storage="_ChiTietPhieuNhaps", ThisKey="MaPhieNhap", OtherKey="MaPhieuNhap")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuNhap_ChiTietPhieuNhap", Storage="_ChiTietPhieuNhaps", ThisKey="MaPhieuNhap", OtherKey="MaPhieuNhap")]
 		public EntitySet<ChiTietPhieuNhap> ChiTietPhieuNhaps
 		{
 			get

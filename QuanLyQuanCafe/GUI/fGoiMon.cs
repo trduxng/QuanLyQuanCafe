@@ -174,8 +174,14 @@ namespace QuanLyQuanCafe
                 return;
             }
             int maHD = HoaDonDAO.Instance.GetHD(table.MaBan);
-            int maMonAn = (cbbTenMon.SelectedItem as LoadMADTO).MaMon;
-            int donGia = (cbbTenMon.SelectedItem as LoadMADTO).GiaMon;
+            LoadMADTO monAn = cbbTenMon.SelectedItem as LoadMADTO;
+            if (monAn == null)
+            {
+                XtraMessageBox.Show("Vui lòng chọn món ăn cần thêm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            int maMonAn = monAn.MaMon;
+            int donGia = monAn.GiaMon;
             int sl = (int)nmrSoLuong.Value;
             int thanhtien = sl * donGia;
             if (maHD == -1)
@@ -218,7 +224,18 @@ namespace QuanLyQuanCafe
             {
                 int maHD = HoaDonDAO.Instance.GetHD(table.MaBan);
                 int giamGia = (int)nmGiamGia.Value;
-                double tongtienchuagiamgia = (Convert.ToDouble(txtETongTien.Text.Split(',')[0]) * 1000);
+
+                double tongtienchuagiamgia = 0;
+                try
+                {
+                    tongtienchuagiamgia = double.Parse(txtETongTien.Text, NumberStyles.Currency, new CultureInfo("vi-VN"));
+                }
+                catch
+                {
+                     XtraMessageBox.Show("Lỗi định dạng tiền tệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     return;
+                }
+
                 //MessageBox.Show(tongtienchuagiamgia.ToString());
                 //double tongtienchuagiamgia = double.Parse(txtETongTien.Text, NumberStyles.Currency);﻿
                 double tongtiendagiamgia = tongtienchuagiamgia - (tongtienchuagiamgia / 100) * giamGia;
@@ -240,16 +257,29 @@ namespace QuanLyQuanCafe
 
         private void sbChuyenBan_Click(object sender, EventArgs e)
         {
-           
-            int maban1 = (lsvHD.Tag as BanAnDTO).MaBan;
-            int maban2 = (cbbChuyenBan.SelectedItem as BanAnDTO).MaBan;
-            DialogResult dr = XtraMessageBox.Show(string.Format("Bạn có thực sự muốn chuyển {0} sang {1}", (lsvHD.Tag as BanAnDTO).TenBan, (cbbChuyenBan.SelectedItem as BanAnDTO).TenBan), "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.None);
+            BanAnDTO banHienTai = lsvHD.Tag as BanAnDTO;
+            BanAnDTO banMoi = cbbChuyenBan.SelectedItem as BanAnDTO;
+
+            if (banHienTai == null)
+            {
+                XtraMessageBox.Show("Vui lòng chọn bàn hiện tại cần chuyển.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (banMoi == null)
+            {
+                XtraMessageBox.Show("Vui lòng chọn bàn mới để chuyển đến.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int maban1 = banHienTai.MaBan;
+            int maban2 = banMoi.MaBan;
+            DialogResult dr = XtraMessageBox.Show(string.Format("Bạn có thực sự muốn chuyển {0} sang {1}", banHienTai.TenBan, banMoi.TenBan), "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.None);
             if (dr == System.Windows.Forms.DialogResult.OK)
             {
                 BanAnDAO.Instance.ChuyenBan(maban1, maban2);
                 LoadBanAn();
             }
-            
         }
 
         private void btnInHD_Click(object sender, EventArgs e)
