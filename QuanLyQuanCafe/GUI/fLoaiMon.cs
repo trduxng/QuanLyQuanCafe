@@ -89,7 +89,7 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                Image imge = Image.FromFile("C:\\Users\\tung0\\Desktop\\hinhanh\\nhanvien\\user.png");
+                Image imge = Image.FromFile("..\\..\\images\\images.png");
                 picEHinhAnh.Image = imge;
             }
         }
